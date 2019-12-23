@@ -165,4 +165,28 @@ class MainController extends Controller
 		}
 		
 	}
+
+
+	public function delete_comment($id){
+		$all_comments = DB::table('comments')->get();
+		$all_comments = json_decode(json_encode($all_comments), true);
+
+		foreach($all_comments as $comment){
+			if ($comment['id'] == ''.$id){
+				$got = true;
+				$com = $comment;
+				break;
+			}else{
+				$got = false;
+			}
+		}
+
+		if($got){
+			DB::table('comments')->delete($com['id']);
+			return 'Deleted <script>window.location.href="/admin"</script>';
+		}else{
+			return 'This Comment Already Deleted';
+		}
+		
+	}
 }

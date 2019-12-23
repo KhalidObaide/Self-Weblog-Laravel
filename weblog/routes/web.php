@@ -26,6 +26,11 @@ Route::post('/post/', 'MainController@post_p');
 
 // Comment For A Post
 Route::post('/comment/{id}/', 'MainController@comment_p') -> where ('id', '[0-9]+');
+
+// Delete Comment 
+Route::get('/delete_comment/{id}/', 'MainController@delete_comment') -> where ('id', '[0-9]+');
+
+
 /*
 Route::get('/', function () {
     return view('welcome');

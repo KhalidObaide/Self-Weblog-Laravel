@@ -36,8 +36,7 @@
       <h4 class="card-title">{{$comment['name']}}</h4>
 	<kbd>{{$comment['art']}}</kbd>
       <p class="card-text">{!! $comment['comment'] !!}</p>
-      <a href="#" class="btn btn-primary">Keep</a>
-      <a href="#" class="btn btn-danger">Delete</a>
+      <a href="/delete_comment/{{$comment['id']}}/" class="btn btn-danger">Delete</a>
     </div>
   </div>
   
