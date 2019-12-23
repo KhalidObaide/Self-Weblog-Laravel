@@ -33,10 +33,26 @@ class MainController extends Controller
 	}
 
 
+
 	// Admin GET Page
 	public function admin_g(){
-		return view('main.admin');
+		$all_comments = json_decode(json_encode(DB::table('comments') -> get()), true);
+		$all_posts = json_decode(json_encode(DB::table('posts')->get()), true);
+
+		$i = 0;
+		foreach($all_comments as $comment){
+			foreach($all_posts as $post){
+				if ($comment['to'] == ''.$post['id']){
+					$all_comments[$i]['art'] = $post['title'];	
+				}
+			}
+			$i -= -1;	
+		}
+		
+		return view('main.admin', ['all_comments' => $all_comments]);
 	}
+
+
 
 
 	// Art Get Page

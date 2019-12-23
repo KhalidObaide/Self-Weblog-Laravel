@@ -30,57 +30,18 @@
   <h2>Comments</h2>
 
 
+@foreach($all_comments as $comment)
   <div class="card bg-dark" style="margin-bottom : 25px; color:white; width:350px; display : inline-block; vertical-align: top;">
     <div class="card-body">
-      <h4 class="card-title">John Doe</h4>
-	<kbd>Hello, World!</kbd>
-      <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
-      <a href="#" class="btn btn-primary">Like</a>
-      <a href="#" class="btn btn-danger">Dislike</a>
+      <h4 class="card-title">{{$comment['name']}}</h4>
+	<kbd>{{$comment['art']}}</kbd>
+      <p class="card-text">{!! $comment['comment'] !!}</p>
+      <a href="#" class="btn btn-primary">Keep</a>
+      <a href="#" class="btn btn-danger">Delete</a>
     </div>
   </div>
-
-
-  <div class="card bg-dark" style="margin-bottom : 25px; color : white; width:350px; display : inline-block; vertical-align : top;" >
-    <div class="card-body">
-      <h4 class="card-title">Khalid Obaide</h4>
-	<kbd>Why Islam?</kbd>
-      <p class="card-text">
-	Some example text some example text. Jane Doe is an architect and engineer. And Yay
-	This is Just For Testing Bro 
-	</p>
-      <a href="#" class="btn btn-primary" >Like</a>
-	<a href="#" class="btn btn-danger">Dislike</a>
-    </div>
-  </div>
-
-  <div class="card bg-dark" style="margin-bottom : 20px; color : white; width:350px; display : inline-block; vertical-align : top;" >
-    <div class="card-body">
-      <h4 class="card-title">Rashid Sajid</h4>
-	<kbd>Open Source ?!</kbd>
-      <p class="card-text">
-	I didn't really understand what is this ?
-	</p>
-      <a href="#" class="btn btn-primary" >Like</a>
-	<a href="#" class="btn btn-danger">Dislike</a>
-    </div>
-  </div>
-
-
-
-  <div class="card bg-dark" style="margin-bottom : 20px; color : white; width:350px; display : inline-block; vertical-align : top;" >
-    <div class="card-body">
-      <h4 class="card-title">Life Stucks</h4>
-	<kbd>Why Islam?</kbd>
-      <p class="card-text">
-	I am in the same position as you i was like this every minutes of my life but i solved it. So Anyway Thank you.
-	</p>
-      <a href="#" class="btn btn-primary" >Like</a>
-	<a href="#" class="btn btn-warning">Dislike</a>
-	<a href="#" class="btn btn-danger">Delete</a>
-    </div>
-  </div>
-
+  
+@endforeach
 
 
 </div>
