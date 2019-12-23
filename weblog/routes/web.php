@@ -24,6 +24,8 @@ Route::get('/{id}', 'MainController@art_g')->where('id', '[0-9]+');
 // Post An Art
 Route::post('/post/', 'MainController@post_p');
 
+// Comment For A Post
+Route::post('/comment/{id}/', 'MainController@comment_p') -> where ('id', '[0-9]+');
 /*
 Route::get('/', function () {
     return view('welcome');
