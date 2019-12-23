@@ -1,6 +1,6 @@
-#SELF WEBLOG
+# SELF WEBLOG
 
-#What Is This :
+# What Is This :
 	There is only the admin who posts something on the weblog and he is the only one who edit or delete it.
 	All comment to every single posts with filling there names and email adress no account required.
 	And there is the page for contact us.
@@ -8,7 +8,7 @@
 	And more ...
 
 
-#TODO :
+# TODO :
 	1. An Admin page for the admin to post, edit, or delete posts.
 	2. The Admin page includes also the ability to read and answere the comments for each post.
 	3. Some Views for (index, post[int], contact us, admin page, more ... )
@@ -22,10 +22,10 @@
 	6. Develope Later On	
 
 
-#using : 
-	1. Laravel v.master
-	2. PHP v.7.2.26
+# using : 
+	* Laravel v.master
+	* PHP v.7.2.26
 
 
-#Working On:
+# Working On:
 	Ubuntu 18,04 LTS 
