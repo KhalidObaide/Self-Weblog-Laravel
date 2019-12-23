@@ -6,7 +6,7 @@
 <div class="container">
   <h2>Post A Post</h2>
   <p>Write Now And Publish Now</p>
-  <form action method="post">
+  <form action="/post/" method="post">
 	@csrf
     <div class="form-group">
       <label for="usr">Title:</label>

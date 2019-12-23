@@ -24,19 +24,15 @@
 <!-- Best Of ME -->
 <br><br><br>
 <div class="container">
-	<h3>Best Of Me :</h3>
-
+	<h3>From Me : </h3>
 	<br>
+
+	@foreach($all_arts as $art)
 	<div class="card bg-success" style="margin-bottom : 20px;">
-		<h4 style="color : white; margin : 10px;">About The World ?</h4>
-		<a href="#"class="btn btn-info" style="width : 120px; position : absolute; right : 6px; top: 6px; color : white;">Read Now</a>
+		<h4 style="color : white; margin : 10px;">{{$art['title']}}</h4>
+		<a href="/{{$art['id']}}"class="btn btn-info" style="width : 120px; position : absolute; right : 6px; top: 6px; color : white;">Read Now</a>
 	</div>	
-
-	<div class="card bg-success" style="margin-bottom : 20px;">
-		<h4 style="color : white; margin : 10px;">Why Islam?</h4>
-		<a href="#"class="btn btn-info" style="width : 120px; position : absolute; right : 6px; top: 6px; color : white;">Read Now</a>
-	</div>
-
+	@endforeach
 
 </div>
 

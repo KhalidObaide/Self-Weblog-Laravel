@@ -19,7 +19,10 @@ Route::get('/', 'MainController@index_g');
 Route::get('/admin', 'MainController@admin_g');
 
 // Art Page
-Route::get('/art', 'MainController@art_g');
+Route::get('/{id}', 'MainController@art_g')->where('id', '[0-9]+');
+
+// Post An Art
+Route::post('/post/', 'MainController@post_p');
 
 /*
 Route::get('/', function () {
