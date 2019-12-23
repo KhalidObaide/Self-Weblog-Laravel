@@ -1,9 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Mail;
 
 
 // Helper Functions 
@@ -48,8 +48,13 @@ class MainController extends Controller
 			}
 			$i -= -1;	
 		}
+
+		$all_contacts = DB::table('contacts')->get();
+		$all_contacts = json_decode(json_encode($all_contacts), true);
+	
+
 		
-		return view('main.admin', ['all_comments' => $all_comments]);
+		return view('main.admin', ['all_comments' => $all_comments, 'all_contacts' => $all_contacts]);
 	}
 
 
@@ -188,5 +193,87 @@ class MainController extends Controller
 			return 'This Comment Already Deleted';
 		}
 		
+	}
+
+	
+	public function contact_p(Request $request){
+		DB::table('contacts')->insert([
+			'name' => $request['name'],
+			'email' => $request['email'],
+			'subject' => str_replace("\r", "<br>", $request['subject']),
+			'time_added' => date("Y/m/d")
+		]);
+
+		return 'Thank you, <br> We Will Contact you As soon As possible ';
+	}
+
+
+	public function delete_contact($id){
+		$all_contacts = DB::table('contacts')->get();
+		$all_contacts = json_decode(json_encode($all_contacts), true);
+
+		foreach($all_contacts as $contact){
+			if ($contact['id'] == ''.$id){
+				$got = true;
+				$cont = $contact;
+				break;
+			}else{
+				$got = false;
+			}
+		}
+
+		if ($got){
+			DB::table('contacts')->delete($id);
+			return 'Deleted';
+		}else{
+			return 'This Comment Already Deleted ';
+		}		
+	}
+
+
+	public function answer_g($id){
+		$all_contacts = DB::table('contacts')->get();
+		$all_contacts = json_decode(json_encode($all_contacts), true);
+
+		foreach($all_contacts as $contact){
+			if ($contact['id'] == ''.$id){
+				$got = true;
+				$cont = $contact;
+				break;
+			}else{
+				$got = false;
+			}
+		}
+
+		if ($got){
+			return view('main.answer', ['contact' => $cont]);		
+		}else{
+			return 'This Comment Does Not Exist or Deleted.';
+		}
+	}
+
+
+	public function answer_p(Request $request){
+		$all_contacts = DB::table('contacts') ->get();
+		$all_contacts = json_decode(json_encode($all_contacts), true);
+
+		foreach($all_contacts as $contact){
+			if($contact['id'] == ''.$request->id){
+				$got = true;
+				$cont = $contact; 
+				break;
+			}else{
+				$got = false;
+			}
+		}
+
+		if ($got){
+			// Well I Let You Send The Email 
+			//
+
+			return 'Answered';	
+		}else{
+			return 'Some Problem Going On';
+		}
 	}
 }

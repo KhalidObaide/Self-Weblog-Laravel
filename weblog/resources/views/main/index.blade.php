@@ -44,7 +44,8 @@
 	<br>
 
 <div class="containerr">
-  <form action="/action_page.php">
+  <form action="/contact/" method="post">
+	@csrf
     <label for="fname">First Name</label>
     <input class="sm-ipt" type="text" id="fname" name="name" placeholder="Your name..">
 

@@ -54,30 +54,17 @@
 <div class="container">
   <h2> Your Inbox : </h2>
 
+@foreach($all_contacts as $contact)
   <div class="card bg-primary text-white">
 	<div class="card-body" >
-		<p>from <b>Khalid Obaide</b></p>
-		<p>Hello Khalid Obaide, I love your Contact And Articals Thank You</p>
-		<a href="#" class="btn btn-danger">Delete</a>
-		<a href="#" class="btn btn-success">Answer</a>
+		<p>from <b>{{$contact['name']}}</b></p>
+		<p>{!! $contact['subject'] !!}</p>
+		<a href="/delete_contact/{{$contact['id']}}/" class="btn btn-danger">Delete</a>
+		<a href="/answer/{{$contact['id']}}/" class="btn btn-success">Answer</a>
 	</div>
   </div>
-  
-  <br><br>
-
-  <div class="card bg-primary text-white">
-	<div class="card-body" >
-		<p>from <b>Aziz Hakim</b></p>
-		<p>
-			How Are you Bro I am A big fan of you. And Watch every single stream 
-			you put on.
-		</p>
-		<a href="#" class="btn btn-danger">Delete</a>
-		<a href="#" class="btn btn-success">Answer</a>
-	</div>
-  </div>
-
-
+<br><br>
+@endforeach
 
 </div>
 

@@ -31,6 +31,21 @@ Route::post('/comment/{id}/', 'MainController@comment_p') -> where ('id', '[0-9]
 Route::get('/delete_comment/{id}/', 'MainController@delete_comment') -> where ('id', '[0-9]+');
 
 
+// Contacting POST
+Route::post('/contact/', 'MainController@contact_p');
+
+
+// Delete Contact 
+Route::get('/delete_contact/{id}/', 'MainController@delete_contact') -> where ('id' , '[0-9]+');
+
+
+// Answer the contact GET
+Route::get('/answer/{id}/', 'MainController@answer_g') -> where ('id', '[0-9]+');
+
+
+// Answer The contact POST
+Route::post('/answer/{id}/', 'MainController@answer_p') -> where ('id', '[0-9]+');
+
 /*
 Route::get('/', function () {
     return view('welcome');
