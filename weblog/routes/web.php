@@ -15,6 +15,7 @@
 // Index Page 
 Route::get('/', 'MainController@index_g');
 
+Route::get('/admin', 'MainController@admin_g');
 
 /*
 Route::get('/', function () {
