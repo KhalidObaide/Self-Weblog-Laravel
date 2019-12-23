@@ -11,8 +11,13 @@ class MainController extends Controller
 		return view('main.index');
 	}
 
-	// Admin 
+	// Admin GET Page
 	public function admin_g(){
 		return view('main.admin');
+	}
+
+	// Art Get Page
+	public function art_g(){
+		return view('main.art');
 	}
 }

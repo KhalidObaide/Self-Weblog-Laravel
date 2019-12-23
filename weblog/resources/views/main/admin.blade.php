@@ -121,5 +121,7 @@
 
 </div>
 
-
+<!-- Copyright reserved -->
+<br><br><br>
+<center>Made By <b>Khalid Obaide</b></center>
 @endsection
