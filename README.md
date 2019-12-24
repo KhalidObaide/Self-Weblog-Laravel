@@ -1,5 +1,7 @@
 # Self Weblog 
 ![alt text](./shots/001.png)
+![alt text](./shots/002.png)
+![alt text](./shots/003.png)
 
 This is A self weblog for free to use, Made By Khalid Obaide.
 what is this ? 
