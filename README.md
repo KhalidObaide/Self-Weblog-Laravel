@@ -1,4 +1,6 @@
 # Self Weblog 
+![alt text](./shots/001.png)
+
 This is A self weblog for free to use, Made By Khalid Obaide.
 what is this ? 
 	The Admin [Which is you] is the one who post articles in this weblog.
