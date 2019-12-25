@@ -18,6 +18,8 @@ class Admin extends Migration
             $table->string('name');
 	    $table->string('intro');
 	    $table->string('time_added');
+	    $table->string('username');
+	    $table->string('password');
         });
     }
 

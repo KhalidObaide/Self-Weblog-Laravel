@@ -3,9 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Mail;
-
-
+use Cookie;
 // Helper Functions 
 
 function _to_html($text){		
@@ -58,6 +56,13 @@ class MainController extends Controller
 
 	// Admin GET Page
 	public function admin_g(){
+		$cookie = Cookie::get("admin");
+		if ($cookie == false){
+			return '<script>window.location.href="http://127.0.0.1:8000/login"</script>';
+
+		}
+
+
 		$all_comments = json_decode(json_encode(DB::table('comments') -> get()), true);
 		$all_posts = json_decode(json_encode(DB::table('posts')->get()), true);
 
@@ -79,7 +84,7 @@ class MainController extends Controller
 		$admin = json_decode(json_encode($admin), true);
 		$admin = $admin[0];
 		$admin['intro'] = str_replace('<br>', '&#13;&#10;', $admin['intro']);
-
+		
 		return view('main.admin', [
 			'all_posts'=>$all_posts,
 			'all_comments' => $all_comments,
@@ -282,11 +287,61 @@ class MainController extends Controller
 
 
 	public function edit_profile(Request $request){	
-		DB::table('admin')->where('id', '2')->update([
+		DB::table('admin')->where('id', '1')->update([
 			'name' => $request->name,
 			'intro' => _to_html($request->intro)
 		]);
 		
 		return 'Updated';
 	}
+
+	public function login(Request $request){
+		$admin = json_decode(json_encode(DB::table('admin')->get()),true)[0];
+		if ($request->username == $admin['username'] && $request->password == $admin['password']){
+
+			// Start Sessions 
+			Cookie::queue('admin', 'true', 60*24*30 /* One Month */ );
+
+			// Return Something (Admin Page)
+			return '<script>window.location.href="http://127.0.0.1:8000/admin"</script>';
+		}else{
+			return 'Wrong Password or username, Try Again !';
+		}	
+		
+	}
+
+
+	public function login_g(){
+		return view('main.login');
+	}
+
+	public function logout(){
+		Cookie::queue(Cookie::forget('admin'));
+		return 'Logged Out';
+	}
+
+
+
+	// TEST functions 
+	/*
+	public function set($val, Request $request){
+		$name = "ss";
+
+		Cookie::queue($name, $val, 5);
+		return 'Set';
+	}
+
+	public function get(Request $request){
+		$value = Cookie::get('ss');
+		return $value;
+	}
+
+	public function del(){
+		Cookie::queue(Cookie::forget('admin'));
+
+		return 'Logged Out';
+	}
+	 */
+
+	
 }

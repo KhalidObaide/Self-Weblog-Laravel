@@ -2,6 +2,15 @@
 @section('title') Admin @endsection
 @section('body')
 
+
+<div class="container">
+	<a href="/logout/" class="btn btn-danger">Log out</a>
+
+</div>
+
+<br><br><br>
+
+
 <!-- New Post Form -->
 <div class="container">
   <h2>Post A Post</h2>
@@ -105,6 +114,7 @@
     <button type="submit" class="btn btn-primary">Update Now</button>
   </form>
 </div>
+
 
 
 <br><br>

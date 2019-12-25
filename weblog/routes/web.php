@@ -55,9 +55,27 @@ Route::post('/edit_post/', 'MainController@edit_post_p');
 
 Route::post('/edit_profile/', 'MainController@edit_profile');
 
+Route::post('/login/', 'MainController@login');
+
+Route::get('/logout/', 'MainController@logout');
+
+Route::get('/login/', 'MainController@login_g');
+
+// TEST rout
+Route::get('/test/', function (){
+	DB::table('admin')->insert([
+		'name' => 'Khalid Obaide',
+		'username' => 'KhalidObaide',
+		'intro'=> 'HEllo I Am Khalid Obaide',
+		'time_added' => '25 Dec 2019',
+		'password' => '123456789'
+	]);
+
+	return 'HEllo World';
+});
 /*
 Route::get('/', function () {
     return view('welcome');
 });
-
  */
+
