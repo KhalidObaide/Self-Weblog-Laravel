@@ -1,5 +1,5 @@
 @extends('base')
-@section('title') Edit Post @endsection 
+@section('title') Edit Post | {{$admin['name']}}@endsection 
 @section('body')
 
 <br><br><br>

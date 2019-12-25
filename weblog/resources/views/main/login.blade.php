@@ -1,5 +1,5 @@
 @extends('base')
-@section('title') Login @endsection
+@section('title') Login | {{admin['name']}}@endsection
 @section('body')
 
 <br><br><br><br>

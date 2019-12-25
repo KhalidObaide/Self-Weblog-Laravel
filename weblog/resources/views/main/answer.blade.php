@@ -1,5 +1,5 @@
 @extends('base')
-@section('title') Answer @endsection 
+@section('title') Answer | {{$admin['name']}} @endsection 
 @section('body')
 
 <br><br>

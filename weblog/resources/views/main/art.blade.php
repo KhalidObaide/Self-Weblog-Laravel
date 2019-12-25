@@ -1,5 +1,5 @@
 @extends('base')
-@section('title') About Afghanistan @endsection 
+@section('title') {{$title}}  | {{$admin['name']}}@endsection 
 @section('body')
 
 

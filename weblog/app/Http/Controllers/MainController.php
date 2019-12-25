@@ -83,7 +83,10 @@ class MainController extends Controller
 		$all_arts = json_decode(json_encode($all_arts), true);
 		$admin = json_decode(json_encode(DB::table('admin')->get()), true)[0];
 
-		return view('main.index', ['all_arts' => $all_arts, 'admin' => $admin]);
+		return view('main.index', [
+			'all_arts' => $all_arts, 
+			'admin' => $admin
+		]);
 	}
 
 
@@ -153,8 +156,16 @@ class MainController extends Controller
 		$art = $check['art'];
 		$time_added = $check['time_added'];
 		$id = $check['id'];
+		$admin = json_decode(json_encode(DB::table('admin')->get()), true)[0];
 
-		return view('main.art', ['title' => $title, 'art' => $art, 'time_added'=>$time_added, 'id' => $id, 'got_comments' => $got_comments]);
+		return view('main.art', [
+			'title' => $title, 
+			'art' => $art, 
+			'time_added'=>$time_added, 
+			'id' => $id, 
+			'got_comments' => $got_comments,
+			'admin' => $admin
+		]);
 
 	}	
 
@@ -281,7 +292,12 @@ class MainController extends Controller
 			return 'This Comments Deleted Or Does Not Exist';
 		}
 
-		return view('main.answer', ['contact' => $check]);
+		$admin = json_decode(json_encode(DB::table('admin')->get()), true)[0];
+
+		return view('main.answer', [
+			'contact' => $check,
+			'admin' => $admin
+		]);
 	}
 
 
@@ -334,8 +350,13 @@ class MainController extends Controller
 		}
 
 		$check['art'] = str_replace('<br>', '', $check['art']);
+		
+		$admin = json_decode(json_encode(DB::table('admin')->get()), true)[0];
 
-		return view('main.edit_post', ['post' => $check]);
+		return view('main.edit_post', [
+			'post' => $check,
+			'admin' => $admin
+		]);
 
 	}
 
@@ -398,8 +419,11 @@ class MainController extends Controller
 
 	public function login_g(){
 		if(start()){return start_res();}
+		$admin = json_decode(json_encode(DB::table('admin')->get()), true);
 
-		return view('main.login');
+		return view('main.login', [
+			'admin' => $admin
+		]);
 	}
 
 	public function logout(){
@@ -416,6 +440,8 @@ class MainController extends Controller
 		if(start() == false){
 			return 'You Already Signed up ';
 		}
+		$admin = json_decode(json_encode(DB::table('admin')->get()),true);
+
 		return view('main.signup');
 	}
 

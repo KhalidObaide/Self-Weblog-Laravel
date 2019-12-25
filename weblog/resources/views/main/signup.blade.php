@@ -1,5 +1,5 @@
 @extends('base')
-@section('title') Sign up @endsection
+@section('title') Sign up | Weblog @endsection
 @section('body')
 
 <br><br><br><br>
