@@ -1,36 +1,31 @@
-# SELF WEBLOG
-
-# What Is This :
-	There is only the admin who posts something on the weblog and he is the only one who edit or delete it.
-	All comment to every single posts with filling there names and email adress no account required.
-	And there is the page for contact us.
-	A page for intro of the admin.	
-	And more ...
-
-
-# TODO :
-	1. An Admin page for the admin to post, edit, or delete posts.
-	2. The Admin page includes also the ability to read and answere the comments for each post.
-	3. Some Views for (index, post[int], contact us, admin page, more ... )
-		I.   index page is for intro of the admin 
-		II.  post page is for a single post with the whole data about it. which includes the comments.
-		III. contact us is a simple form for the contacting the admin (The admin has an inbox)
-		IV.  admin page : Everything 
-		V.   Removing Posts
-		VI.  Editing Posts 
-		VII. Edit Profile Intro
-		IIX. LOGIN page for admin, Logout
-		IX.  The First Sign up Page (it will Apear only once)
-		X.   more ...
-	4. Try To Use Only Bootstrap for the design 
-	5. Standard Controllers 
-	6. Develope Later On	
+# Self Weblog 
+This is A self weblog for free to use, Made By Khalid Obaide.
+what is this ? 
+	The Admin [Which is you] is the one who post articles in this weblog.
+	The other people comes in and comments to your articles.
+	They can also contact you, and you answer theme throug mail. In simple english there is a "contact me" page also
+	There is only one admin 
 
 
-# using : 
-	* Laravel v.master
-	* PHP v.7.2.26
+# Setup 
+	1. Download The Repository 
+	2. install php.7.2.X, Laravel, and ...
+	3. ``` cd Self-Weblog-Laravel/weblog/ ```
+	4. ``` php artisan serve ```
+	5. And There Is your weblog open the browser on localhost:8000
 
 
-# Working On:
-	Ubuntu 18,04 LTS 
+# Tutorial 
+	The Complete process of making this in laravel is avalible in :  https://www.youtube.com/channel/UCLRqcPs2OOPOEkew2Y-eoKw
+	It is kind of streaming for long time no break challenge
+
+
+# Khalid Obaide
+	I Am Khalid Obaide The Creator Of This
+	Follow me on social media: 
+	youtube : https://www.youtube.com/channel/UCLRqcPs2OOPOEkew2Y-eoKw
+	facebook : https://www.facebook.com/khalid.obaidi.56
+	instagram : @Khalid Obaide
+	everwhere : Khalid Obaide
+
+
