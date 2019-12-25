@@ -49,8 +49,9 @@ class MainController extends Controller
 		// Getting All Arts 
 		$all_arts = DB::table('posts') -> get();
 		$all_arts = json_decode(json_encode($all_arts), true);
-		
-		return view('main.index', ['all_arts' => $all_arts]);
+		$admin = json_decode(json_encode(DB::table('admin')->get()), true)[0];
+
+		return view('main.index', ['all_arts' => $all_arts, 'admin' => $admin]);
 	}
 
 
@@ -74,8 +75,17 @@ class MainController extends Controller
 		$all_contacts = json_decode(json_encode($all_contacts), true);
 		$all_posts = json_decode(json_encode(DB::table('posts')->get()), true);
 
-		
-		return view('main.admin', ['all_posts'=>$all_posts, 'all_comments' => $all_comments, 'all_contacts' => $all_contacts]);
+		$admin = DB::table('admin')->get();
+		$admin = json_decode(json_encode($admin), true);
+		$admin = $admin[0];
+		$admin['intro'] = str_replace('<br>', '&#13;&#10;', $admin['intro']);
+
+		return view('main.admin', [
+			'all_posts'=>$all_posts,
+			'all_comments' => $all_comments,
+			'all_contacts' => $all_contacts,
+			'admin' => $admin
+		]);
 	}
 
 
@@ -117,7 +127,7 @@ class MainController extends Controller
 		$art = $request->art; 
 		$time_added = ''. date("Y/m/d");
 		
-		$art = str_replace("\r", "<br>", $art);
+		$art = _to_html($art);
 
 		//Save Data To Table (posts)
 		DB::table('posts')->insert(
@@ -149,7 +159,7 @@ class MainController extends Controller
 		$to = $request->id;
 
 		// Convert the comment from flat text to text 
-		$comment = str_replace("\r", "<br>", $comment);
+		$comment = _to_html($comment);
 			
 		// Saving to Table (comments)
 		DB::table('comments')->insert([
@@ -180,7 +190,7 @@ class MainController extends Controller
 		DB::table('contacts')->insert([
 			'name' => $request['name'],
 			'email' => $request['email'],
-			'subject' => str_replace("\r", "<br>", $request['subject']),
+			'subject' => _to_html($request['subject']),
 			'time_added' => date("Y/m/d")
 		]);
 
@@ -257,7 +267,7 @@ class MainController extends Controller
 			return 'This Article Does Not Exist';
 		}
 		
-		$check['art'] = str_replace('\r', '<br>', $request->art);
+		$check['art'] = _to_html($request->art);
 		$check['title'] = $request->title;
 		
 		DB::table('posts')->where('id', $request->id)->update([
@@ -267,5 +277,16 @@ class MainController extends Controller
 		
 		return 'Updated ';
 
+	}
+
+
+
+	public function edit_profile(Request $request){	
+		DB::table('admin')->where('id', '2')->update([
+			'name' => $request->name,
+			'intro' => _to_html($request->intro)
+		]);
+		
+		return 'Updated';
 	}
 }

@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,6 +52,8 @@ Route::get('/delete_post/{id}/', 'MainController@delete_post') -> where ('id', '
 Route::get('/edit_post/{id}/', 'MainController@edit_post_g') -> where ('id', '[0-9]+');
 
 Route::post('/edit_post/', 'MainController@edit_post_p');
+
+Route::post('/edit_profile/', 'MainController@edit_profile');
 
 /*
 Route::get('/', function () {

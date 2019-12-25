@@ -85,6 +85,29 @@
 	@endforeach
 </div>
 <br><br>
+
+<!-- New Post Form -->
+<div class="container">
+  <h2>Edit Profile : </h2>
+  <p>It will be update right now.</p>
+  <form action="/edit_profile/" method="post">
+      @csrf
+      <div class="form-group">
+      <label for="usr">Name:</label>
+      <input type="text" class="form-control" id="usr" name="name" value="{{$admin['name']}}">
+    </div>
+
+    <div class="form-group">
+      <label for="comment">Who Am I ?</label>
+      <textarea class="form-control" rows="5" id="comment" name="intro" style="resize : vertical">{!!$admin['intro']!!}</textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Now</button>
+  </form>
+</div>
+
+
+<br><br>
 <!-- Copyright reserved -->
 <br><br><br>
 <center>Made By <b>Khalid Obaide</b></center>

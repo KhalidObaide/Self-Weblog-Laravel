@@ -19,7 +19,8 @@
 		V.   Removing Posts
 		VI.  Editing Posts 
 		VII. Edit Profile Intro
-		IIX. more ..
+		IIX. LOGIN page for admin
+		IX.  more ...
 	4. Try To Use Only Bootstrap for the design 
 	5. Standard Controllers 
 	6. Develope Later On	

@@ -9,12 +9,8 @@
 	<h3> Who Am I ? </h3>
 	<div class="card bg-dark" style="color: white;">
 		<p style="margin : 10px;">
-		Hello I am Khalid Obaide. The Owner Of this weblog. <br>
-		I really thank you for comming in and enjoying my artices go ahead and leave a comment if you think i am awsome if not just go ahead and again drop a like or comment below. <br>
-
-		Thanks Guys I really love to post more and more things but there is no such time for me to do that so ... 
-		<br>
-		And Again Khalid Obaide the Owner Of this Weblog  
+			<b>{{$admin['name']}}</b><br>
+			{!!$admin['intro']!!}
 		</p>
 	</div>
 </div>
