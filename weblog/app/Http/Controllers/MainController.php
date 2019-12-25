@@ -40,10 +40,29 @@ function check($have, $need, $table){
 	}
 
 }
+
+
+function start(){
+	$admin = json_decode(json_encode(DB::table('admin')->get()), true);
+	if(sizeof($admin) > 0){
+		return false;
+	}else{
+		return true;
+	}
+}
+
+
+function start_res(){
+	return 'You Have To Sign up As Admin in order to use this weblog <a href="/signup/">Sign Up</a>';
+
+
+}
 class MainController extends Controller
 {
 	// Index GET Page
 	public function index_g(){
+		if(start()){return start_res();}	
+
 		// Getting All Arts 
 		$all_arts = DB::table('posts') -> get();
 		$all_arts = json_decode(json_encode($all_arts), true);
@@ -56,6 +75,9 @@ class MainController extends Controller
 
 	// Admin GET Page
 	public function admin_g(){
+		if(start()){return start_res();}
+
+
 		$cookie = Cookie::get("admin");
 		if ($cookie == false){
 			return '<script>window.location.href="http://127.0.0.1:8000/login"</script>';
@@ -98,6 +120,9 @@ class MainController extends Controller
 
 	// Art Get Page
 	public function art_g($id){	
+		if(start()){return start_res();}
+
+
 		$check = check($id, 'id', 'posts');
 		if ($check == false){
 			return 'We Didnt Find The Art';
@@ -128,6 +153,9 @@ class MainController extends Controller
 	
 	// Post POST Page
 	public function post_p(Request $request){
+		if(start()){return start_res();}
+
+
 		$title = $request->title;
 		$art = $request->art; 
 		$time_added = ''. date("Y/m/d");
@@ -150,6 +178,8 @@ class MainController extends Controller
 
 
 	public function comment_p(Request $request, $id){
+		if(start()){return start_res();}
+
 		$check = check($id, 'id', 'posts');
 		if ($check == false){
 			return 'This Article Is No Longer Here ';
@@ -181,6 +211,8 @@ class MainController extends Controller
 
 
 	public function delete_comment($id){	
+		if(start()){return start_res();}
+
 		$check = check($id, 'id' , 'comments');
 		if($check == false){
 			return 'This Comment Already Deleted';
@@ -192,6 +224,8 @@ class MainController extends Controller
 
 	
 	public function contact_p(Request $request){
+		if(start()){return start_res();}
+
 		DB::table('contacts')->insert([
 			'name' => $request['name'],
 			'email' => $request['email'],
@@ -204,6 +238,8 @@ class MainController extends Controller
 
 
 	public function delete_contact($id){
+		if(start()){return start_res();}
+
 		$check = check($id, 'id', 'contacts');
 		if ($check == false){
 			return 'This Comment Already Deleted';
@@ -216,6 +252,8 @@ class MainController extends Controller
 
 
 	public function answer_g($id){
+		if(start()){return start_res();}
+
 		$check = check($id, 'id', 'contacts');
 		if ($check == false){
 			return 'This Comments Deleted Or Does Not Exist';
@@ -226,6 +264,8 @@ class MainController extends Controller
 
 
 	public function answer_p(Request $request){
+		if(start()){return start_res();}
+
 		$check = check($request->id, 'id', 'contacts');
 		if ($check == false){
 			return 'Some Problem Going On';
@@ -240,6 +280,8 @@ class MainController extends Controller
 
 
 	public function delete_post($id){
+		if(start()){return start_res();}
+
 		$check = check($id, 'id', 'posts');
 	       	if ($check == false){
 			return 'This Post Already Deleted ';
@@ -253,6 +295,8 @@ class MainController extends Controller
 	
 
 	public function edit_post_g($id){
+		if(start()){return start_res();}
+
 		$check = check($id, 'id', 'posts');
 		if ($check == false){
 			return 'This Article Does Not Exist';
@@ -266,6 +310,8 @@ class MainController extends Controller
 
 
 	public function edit_post_p(Request $request){
+		if(start()){return start_res();}
+
 
 		$check = check($request->id, 'id', 'posts');
 		if($check == false){
@@ -287,6 +333,9 @@ class MainController extends Controller
 
 
 	public function edit_profile(Request $request){	
+		if(start()){return start_res();}
+
+
 		DB::table('admin')->where('id', '1')->update([
 			'name' => $request->name,
 			'intro' => _to_html($request->intro)
@@ -312,14 +361,49 @@ class MainController extends Controller
 
 
 	public function login_g(){
+		if(start()){return start_res();}
+
 		return view('main.login');
 	}
 
 	public function logout(){
+		if(start()){return start_res();}
+
 		Cookie::queue(Cookie::forget('admin'));
 		return 'Logged Out';
 	}
 
+
+
+	public function signup_g(){
+		if(start() == false){
+			return 'You Already Signed up ';
+		}
+		return view('main.signup');
+	}
+
+	public function signup_p(Request $request){
+		if (start() == false){
+			return 'You Already Sign Up';
+		}
+
+		if($request->username == '' || $request->password == ''){
+			return 'You Cannot Let The Username or password be empty';
+		}if($request->password != $request->re_password){
+			return 'The Two Passwords Should Match Each Other';
+			}
+		
+
+		DB::table('admin')->insert([
+			'name' => $request->name,
+			'intro' => 'Hello I Am ' . $request->name,
+			'time_added' => date("Y/m/d"),
+			'username' => $request->username,
+			'password' => $request->password
+		]);
+
+		return '<script>window.location.href="/admin/";</script>';
+	}
 
 
 	// TEST functions 
