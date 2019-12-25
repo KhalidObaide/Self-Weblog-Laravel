@@ -21,7 +21,7 @@ what is this ?
 	7. edit .env file on line 9 : DB_CONNECTION = sqlite
 	8. php artisan migrate
 	9. php artisan serve
-	5. And There Is your weblog open the browser on http://127.0.0.1:8000
+	10. And There Is your weblog open the browser on http://127.0.0.1:8000
 
 
 # Tutorial 
