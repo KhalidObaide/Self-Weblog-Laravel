@@ -5,11 +5,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Cookie;
 // Helper Functions 
-$url = 'http://127.0.0.1:8000';
-
 function page($name){
-
-	return '<script>window.location.href="'$url . $name . '";</script>';
+	$url = 'http://127.0.0.1:8000';
+	return '<script>window.location.href="' . $url . $name . '";</script>';
 }
 
 
@@ -49,6 +47,16 @@ function check($have, $need, $table){
 }
 
 
+function admin(){
+	$cookie = Cookie::get('admin');
+	if ($cookie == 'true'){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+
 function start(){
 	$admin = json_decode(json_encode(DB::table('admin')->get()), true);
 	if(sizeof($admin) > 0){
@@ -83,13 +91,7 @@ class MainController extends Controller
 	// Admin GET Page
 	public function admin_g(){
 		if(start()){return start_res();}
-
-
-		$cookie = Cookie::get("admin");
-		if ($cookie == false){
-			return page('/login');
-
-		}
+		if(admin() == false){return page('/login');}
 
 
 		$all_comments = json_decode(json_encode(DB::table('comments') -> get()), true);
@@ -161,13 +163,16 @@ class MainController extends Controller
 	// Post POST Page
 	public function post_p(Request $request){
 		if(start()){return start_res();}
-
+		if(admin() == false){return page('/login');}		
 
 		$title = $request->title;
 		$art = $request->art; 
 		$time_added = ''. date("Y/m/d");
-		
 		$art = _to_html($art);
+			
+		if ($title == '' || $art == ''){
+			return 'You Should Fill Does Inputs ';
+		}
 
 		//Save Data To Table (posts)
 		DB::table('posts')->insert(
@@ -186,7 +191,10 @@ class MainController extends Controller
 
 	public function comment_p(Request $request, $id){
 		if(start()){return start_res();}
-
+		
+		if ($request->name == '' or $request->email == '' or $request->comment = '' ){
+			return 'You Have To Fill Does Inputs';
+		}
 		$check = check($id, 'id', 'posts');
 		if ($check == false){
 			return 'This Article Is No Longer Here ';
@@ -219,6 +227,7 @@ class MainController extends Controller
 
 	public function delete_comment($id){	
 		if(start()){return start_res();}
+		if(admin() == false){return page('/login');}
 
 		$check = check($id, 'id' , 'comments');
 		if($check == false){
@@ -232,7 +241,11 @@ class MainController extends Controller
 	
 	public function contact_p(Request $request){
 		if(start()){return start_res();}
-
+		
+		if ($request->name == '' or $request->email == '' or $request->subject == '' ){
+			return 'You Have To Fill Does Inputs ';
+		}
+			
 		DB::table('contacts')->insert([
 			'name' => $request['name'],
 			'email' => $request['email'],
@@ -246,6 +259,7 @@ class MainController extends Controller
 
 	public function delete_contact($id){
 		if(start()){return start_res();}
+		if(admin() == false){return page('/login');}
 
 		$check = check($id, 'id', 'contacts');
 		if ($check == false){
@@ -260,6 +274,7 @@ class MainController extends Controller
 
 	public function answer_g($id){
 		if(start()){return start_res();}
+		if(admin() == false){return page('/login');}
 
 		$check = check($id, 'id', 'contacts');
 		if ($check == false){
@@ -272,6 +287,12 @@ class MainController extends Controller
 
 	public function answer_p(Request $request){
 		if(start()){return start_res();}
+		if(admin() == false){return page('/login');}
+
+		if ($request->head == '' || $request->body == ''){
+			return 'You Should Fill Does Inopts';
+		}
+
 
 		$check = check($request->id, 'id', 'contacts');
 		if ($check == false){
@@ -288,6 +309,7 @@ class MainController extends Controller
 
 	public function delete_post($id){
 		if(start()){return start_res();}
+		if(admin() == false){return page('/login');}
 
 		$check = check($id, 'id', 'posts');
 	       	if ($check == false){
@@ -303,6 +325,8 @@ class MainController extends Controller
 
 	public function edit_post_g($id){
 		if(start()){return start_res();}
+		if(admin() == false){return page('/login');}
+
 
 		$check = check($id, 'id', 'posts');
 		if ($check == false){
@@ -318,7 +342,7 @@ class MainController extends Controller
 
 	public function edit_post_p(Request $request){
 		if(start()){return start_res();}
-
+		if(admin() == false){return page('/login');}
 
 		$check = check($request->id, 'id', 'posts');
 		if($check == false){
@@ -341,6 +365,11 @@ class MainController extends Controller
 
 	public function edit_profile(Request $request){	
 		if(start()){return start_res();}
+		if(admin() == false){return page('/login');}	
+
+		if($request->name == '' || $request->intro == ''){
+			return 'You Should Fill Does Inputs ';
+		}
 
 
 		DB::table('admin')->where('id', '1')->update([
@@ -375,6 +404,7 @@ class MainController extends Controller
 
 	public function logout(){
 		if(start()){return start_res();}
+		if(admin() == false){return page('/login');}
 
 		Cookie::queue(Cookie::forget('admin'));
 		return 'Logged Out';
@@ -398,7 +428,7 @@ class MainController extends Controller
 			return 'You Cannot Let The Username or password be empty';
 		}if($request->password != $request->re_password){
 			return 'The Two Passwords Should Match Each Other';
-			}if(sizeof($request->password) < 8){
+			}if(strlen($request->password) < 8){
 			return 'The Passwor Should Be 8 Charecter At Least';
 			}
 
@@ -413,28 +443,6 @@ class MainController extends Controller
 
 		return page('/admin/');
 	}
-
-
-	// TEST functions 
-	/*
-	public function set($val, Request $request){
-		$name = "ss";
-
-		Cookie::queue($name, $val, 5);
-		return 'Set';
-	}
-
-	public function get(Request $request){
-		$value = Cookie::get('ss');
-		return $value;
-	}
-
-	public function del(){
-		Cookie::queue(Cookie::forget('admin'));
-
-		return 'Logged Out';
-	}
-	 */
 
 	
 }
