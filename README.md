@@ -12,11 +12,16 @@ what is this ?
 
 
 # Setup 
-	1. Download The Repository 
-	2. install php.7.2.X, Laravel, and ...
-	3. cd Self-Weblog-Laravel/weblog/
-	4. php artisan serve
-	5. And There Is your weblog open the browser on localhost:8000
+	1. git clone https://github.com/KhalidObaide/Self-Weblog-Laravel.git
+	2. Self-Weblog-Laravel/weblog/
+	3. composer install
+	4. cp .env.example .env
+	5. php artisan key:generate
+	6. touch ./database/database.sqlite
+	7. edit .env file on line 9 : DB_CONNECTION = sqlite
+	8. php artisan migrate
+	9. php artisan serve
+	5. And There Is your weblog open the browser on http://127.0.0.1:8000
 
 
 # Tutorial 
