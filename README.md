@@ -19,8 +19,9 @@
 		V.   Removing Posts
 		VI.  Editing Posts 
 		VII. Edit Profile Intro
-		IIX. LOGIN page for admin
-		IX.  more ...
+		IIX. LOGIN page for admin, Logout
+		IX.  The First Sign up Page (it will Apear only once)
+		X.   more ...
 	4. Try To Use Only Bootstrap for the design 
 	5. Standard Controllers 
 	6. Develope Later On	
