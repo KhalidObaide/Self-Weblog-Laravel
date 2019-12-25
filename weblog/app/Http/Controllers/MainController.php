@@ -5,6 +5,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Cookie;
 // Helper Functions 
+$url = 'http://127.0.0.1:8000';
+
+function page($name){
+
+	return '<script>window.location.href="'$url . $name . '";</script>';
+}
+
 
 function _to_html($text){		
 	// Convert Flat Text To Text with new lines
@@ -80,7 +87,7 @@ class MainController extends Controller
 
 		$cookie = Cookie::get("admin");
 		if ($cookie == false){
-			return '<script>window.location.href="http://127.0.0.1:8000/login"</script>';
+			return page('/login');
 
 		}
 
@@ -352,7 +359,7 @@ class MainController extends Controller
 			Cookie::queue('admin', 'true', 60*24*30 /* One Month */ );
 
 			// Return Something (Admin Page)
-			return '<script>window.location.href="http://127.0.0.1:8000/admin"</script>';
+			return page('/admin');
 		}else{
 			return 'Wrong Password or username, Try Again !';
 		}	
@@ -391,8 +398,10 @@ class MainController extends Controller
 			return 'You Cannot Let The Username or password be empty';
 		}if($request->password != $request->re_password){
 			return 'The Two Passwords Should Match Each Other';
+			}if(sizeof($request->password) < 8){
+			return 'The Passwor Should Be 8 Charecter At Least';
 			}
-		
+
 
 		DB::table('admin')->insert([
 			'name' => $request->name,
@@ -402,7 +411,7 @@ class MainController extends Controller
 			'password' => $request->password
 		]);
 
-		return '<script>window.location.href="/admin/";</script>';
+		return page('/admin/');
 	}
 
 
