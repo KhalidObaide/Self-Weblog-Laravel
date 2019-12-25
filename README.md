@@ -16,7 +16,10 @@
 		II.  post page is for a single post with the whole data about it. which includes the comments.
 		III. contact us is a simple form for the contacting the admin (The admin has an inbox)
 		IV.  admin page : Everything 
-		V.   more ... 
+		V.   Removing Posts
+		VI.  Editing Posts 
+		VII. Edit Profile Intro
+		IIX. more ..
 	4. Try To Use Only Bootstrap for the design 
 	5. Standard Controllers 
 	6. Develope Later On	

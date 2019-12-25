@@ -46,6 +46,13 @@ Route::get('/answer/{id}/', 'MainController@answer_g') -> where ('id', '[0-9]+')
 // Answer The contact POST
 Route::post('/answer/{id}/', 'MainController@answer_p') -> where ('id', '[0-9]+');
 
+// Deleting Posts
+Route::get('/delete_post/{id}/', 'MainController@delete_post') -> where ('id', '[0-9]+');
+
+Route::get('/edit_post/{id}/', 'MainController@edit_post_g') -> where ('id', '[0-9]+');
+
+Route::post('/edit_post/', 'MainController@edit_post_p');
+
 /*
 Route::get('/', function () {
     return view('welcome');

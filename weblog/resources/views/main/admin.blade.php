@@ -65,9 +65,26 @@
   </div>
 <br><br>
 @endforeach
-
 </div>
 
+<br><br><br>
+
+<div class="container">
+	<h2> Your Posts </h2>
+	@foreach($all_posts as $post)
+	<div class="card bg-warning text-white">
+		<div class="card-body">
+			<p><b>{{$post['title']}}</b></p>
+			<a href="/{{$post['id']}}/" class="btn btn-info">Read Now</a>
+			<a href="/delete_post/{{$post['id']}}/" class="btn btn-danger">Delete</a>
+			<a href="/edit_post/{{$post['id']}}/" class="btn btn-success">Edit</a>
+
+		</div>
+	</div>
+	<br><br>
+	@endforeach
+</div>
+<br><br>
 <!-- Copyright reserved -->
 <br><br><br>
 <center>Made By <b>Khalid Obaide</b></center>
