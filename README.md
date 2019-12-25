@@ -10,8 +10,8 @@ what is this ?
 # Setup 
 	1. Download The Repository 
 	2. install php.7.2.X, Laravel, and ...
-	3. ``` cd Self-Weblog-Laravel/weblog/ ```
-	4. ``` php artisan serve ```
+	3. cd Self-Weblog-Laravel/weblog/
+	4. php artisan serve
 	5. And There Is your weblog open the browser on localhost:8000
 
 
